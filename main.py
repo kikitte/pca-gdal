@@ -3,7 +3,15 @@ import pca
 import raster
 import numpy as np
 
-rasterObjs, arrs, mask, projection, pixelResolution, intersectedBbox = raster.read(['/mnt/AllThings/JSY/RSEI/www/lst.tif', '/mnt/AllThings/JSY/RSEI/www/wet.tif', '/mnt/AllThings/JSY/RSEI/www/ndvi.tif', '/mnt/AllThings/JSY/RSEI/www/ndbsi.tif'])
+rasters = [
+    '/mnt/AllThings/JSY/RSEI/www/lst.tif',
+    '/mnt/AllThings/JSY/RSEI/www/ndbsi.tif',
+    '/mnt/AllThings/JSY/RSEI/www/ndvi.tif',
+    '/mnt/AllThings/JSY/RSEI/www/wet.tif'
+]
+
+rasterObjs, arrs, mask, projection, pixelResolution, intersectedBbox = raster.read(
+    rasters)
 
 # pca transform
 values, vectors, projected = pca.pcaFnc(arrs)
@@ -18,5 +26,5 @@ for bidx in range(projected.shape[0]):
 outfile = '/home/kikat/pca.tif'
 if os.path.exists(outfile):
     os.remove(outfile)
-raster.write(projected, mask, projection, pixelResolution, intersectedBbox, np.finfo(arrs.dtype).min, outfile)
-
+raster.write(projected, mask, projection, pixelResolution,
+             intersectedBbox, np.finfo(arrs.dtype).min, outfile)

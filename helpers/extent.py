@@ -1,10 +1,14 @@
 import math
 
 # determin if one extent intersects another
+
+
 def intersects(extent1, extent2):
     return extent1[0] <= extent2[2] and extent1[2] >= extent2[0] and extent1[1] <= extent2[3] and extent1[3] >= extent2[1]
 
 # get the interesection of two extent
+
+
 def getIntersection(extent1, extent2):
     intersection = createEmpty()
     if (intersects(extent1, extent2)):
@@ -27,5 +31,7 @@ def getIntersection(extent1, extent2):
     return intersection
 
 # create an empty extent
+
+
 def createEmpty():
     return [math.inf, math.inf, -math.inf, -math.inf]
